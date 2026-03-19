@@ -36,7 +36,8 @@ Ranger is a professional-grade command and control framework designed for red te
 
 ##  Architecture Overview
 
-```
+```markdown
+
 ┌─────────────┐     HTTPS      ┌─────────────┐     DNS      ┌─────────────┐
 │   STAGER    │ ─────────────> │     C2      │ ───────────> │   CLIENT    │
 │ (compiled)  │ <───────────── │   Server    │ <─────────── │   Implant   │
