@@ -1,0 +1,47 @@
+
+┌─────────────────┐    1. GET /stage2/<payload>.py      ┌─────────────────────────────┐
+│    STAGER       │ ──────────────────────────────────> │         C2 SERVER           │
+│  (Compiled)     │                                      │   (Flask + Nginx Mask)      │
+│ svchost.exe /   │    2. Returns raw Python script     │  https://your-domain.com    │
+│ packagekitd     │ <────────────────────────────────── │  Port: 4444 (internal)      │
+└─────────────────┘                                      │  Port: 443 (external/Nginx) │
+         │                                               └───────────────┬─────────────┘
+         │                           ┌───────────────────────────────────┼───────────────────┐
+         │                           │                                   │                   │
+         │                           ▼                                   ▼                   ▼
+         │                 ┌─────────────────────┐              ┌──────────────┐    ┌────────────┐
+         │                 │   WordPress Mask    │              │   Database   │    │  Payloads  │
+         │                 │    (Nginx Proxy)    │              │  implants.db │    │  Folder    │
+         │                 │  /wp-admin/ajax.php │              └──────────────┘    │  *.py files │
+         │                 └──────────┬──────────┘                                   └────────────┘
+         │                            │
+         │                            │ 3. Only implant traffic passes
+         │                            ▼
+         │    4. Executes implant in-memory
+         │           (importlib / memfd)
+         │
+         ▼
+┌─────────────────┐    5. Encrypted Beacon (Cookie)    ┌─────────────────────────────┐
+│    IMPLANT      │ ──────────────────────────────────> │         C2 HANDLER          │
+│  (In Memory)    │    POST /wp-admin/admin-ajax.php    │   /api/v1/telemetry         │
+│                 │    Headers: Authorization: Bearer   │   /api/v1/results            │
+│ Taskhostw.exe / │    Cookie: session=<encrypted>      │   /api/v1/uploads            │
+│  metadatah      │ <────────────────────────────────── │                             │
+└─────────────────┘    6. Encrypted Tasks Response      └───────────────┬─────────────┘
+         │                           (Same Cookie format)               │
+         │                                                              │
+         │                   7. DNS Exfiltration Channel                │
+         │      ┌───────────────────────────────────────────────────────┘
+         │      │
+         ▼      ▼
+┌─────────────────────────┐    8. Fragmented DNS Queries      ┌─────────────────────┐
+│   DNS TUNNEL MODULE     │ ─────────────────────────────────> │   DNS LISTENER      │
+│   (payloads/dnstunnel.py│     v0001.data.chunk.session.domain│   Port 53           │
+│    fragmenter)          │ <──────────────────────────────── │   Reconstructs data │
+└─────────────────────────┘    9. No response needed          └─────────────────────┘
+                                 (DNS errors expected)
+
+Legend:
+───► HTTPS/TLS (Port 443)
+~~~► DNS (Port 53/udp)
+
