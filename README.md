@@ -89,11 +89,10 @@ pyinstaller --onefile --name packagekitd stager.py
 pyinstaller --onefile --name metadatah stager.py
 ```
 
-### 2. Deploy Payloads
-Place your implant and modules in the `/payloads` directory:
+### 2. Start DnsTunnel
+
 ```bash
-cp implant.py payloads/
-# All .py files in payloads/ are available for dynamic loading
+python3 dnstunnel.py
 ```
 
 ### 3. Control Implants via Dashboard
