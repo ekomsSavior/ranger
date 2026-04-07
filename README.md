@@ -92,7 +92,7 @@ pyinstaller --onefile --name metadatah stager.py
 ### 2. Deploy Payloads
 Place your implant and modules in the `/payloads` directory:
 ```bash
-cp rogue_implant.py payloads/
+cp implant.py payloads/
 # All .py files in payloads/ are available for dynamic loading
 ```
 
