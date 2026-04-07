@@ -2,7 +2,7 @@
 
 **A Malleable, Cross-Platform C2 Framework with WordPress Mimicry & DNS Exfiltration**
 
-Ranger is a professional-grade command and control framework designed for red team operations, security research, and adversary simulation. It features a three-stage deployment model, advanced evasion techniques, and a modular payload architecture that works across Windows, Linux, macOS, Android, and iOS.
+Ranger is a command and control framework designed for red team operations, security research, and adversary simulation. It features a three-stage deployment model, advanced evasion techniques, and a modular payload architecture that works across Windows, Linux, macOS, Android, and iOS.
 
 ##  Key Features
 
