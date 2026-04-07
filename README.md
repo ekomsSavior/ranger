@@ -59,21 +59,27 @@ sudo apt-get install -y nginx python3-pip openssl
 pip3 install flask cryptography pycryptodome dnspython
 ```
 
-### Quick Deploy
+### clone in
 ```bash
 # Clone the repository
 git clone https://github.com/ekomsSavior/ranger.git
 cd ranger
+```
 
 # Deploy Nginx mask and C2
+```bash
 sudo ./deploy.sh
+```
 
 # Start the C2 server
-python3 c2.py
 
-# Access dashboard
-# https://your-server:4444/phase1/dashboard
+```bash
+python3 c2.py
 ```
+# Access dashboard
+
+# https://your-server:4444/phase1/dashboard
+
 
 ## Usage Guide
 
