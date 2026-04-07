@@ -49,14 +49,13 @@ Ranger is a command and control framework designed for red team operations, secu
 
 ##  Installation
 
-### Prerequisites
 ```bash
 # Ubuntu/Debian
 sudo apt-get update
 sudo apt-get install -y nginx python3-pip openssl
 
 # Python packages
-pip3 install flask cryptography pycryptodome dnspython
+pip3 install flask cryptography pycryptodome dnspython --break-system-packages
 ```
 
 ### clone in
